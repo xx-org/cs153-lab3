@@ -14749,7 +14749,7 @@ bad:
 80106c9b:	e8 20 f9 ff ff       	call   801065c0 <mappages>
 80106ca0:	85 c0                	test   %eax,%eax
 80106ca2:	0f 88 53 ff ff ff    	js     80106bfb <copyuvm+0xbb>
-    for(i = PGROUNDDOWN(STACKTOP); i < STACKTOP-myproc()->stackPages*PGSIZE; i -= PGSIZE){
+    for(i = PGROUNDDOWN(STACKTOP); i > STACKTOP-myproc()->stackPages*PGSIZE; i -= PGSIZE){
 80106ca8:	81 eb 00 10 00 00    	sub    $0x1000,%ebx
 80106cae:	e8 ed c9 ff ff       	call   801036a0 <myproc>
 80106cb3:	b9 ff ff ff 7f       	mov    $0x7fffffff,%ecx
@@ -14757,7 +14757,7 @@ bad:
 80106cbb:	c1 e0 0c             	shl    $0xc,%eax
 80106cbe:	29 c1                	sub    %eax,%ecx
 80106cc0:	39 cb                	cmp    %ecx,%ebx
-80106cc2:	0f 82 58 ff ff ff    	jb     80106c20 <copyuvm+0xe0>
+80106cc2:	0f 87 58 ff ff ff    	ja     80106c20 <copyuvm+0xe0>
 80106cc8:	8b 45 e0             	mov    -0x20(%ebp),%eax
 }
 80106ccb:	83 c4 2c             	add    $0x2c,%esp

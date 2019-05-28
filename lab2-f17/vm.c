@@ -335,7 +335,7 @@ copyuvm(pde_t *pgdir, uint sz)
     if(mappages(d, (void*)i, PGSIZE, V2P(mem), flags) < 0)
       goto bad;
   }
-    for(i = PGROUNDDOWN(STACKTOP); i < STACKTOP-myproc()->stackPages*PGSIZE; i -= PGSIZE){
+    for(i = PGROUNDDOWN(STACKTOP); i > STACKTOP-myproc()->stackPages*PGSIZE; i -= PGSIZE){
     if((pte = walkpgdir(pgdir, (void *) i, 0)) == 0)
       panic("copyuvm: pte should exist");
     if(!(*pte & PTE_P))
